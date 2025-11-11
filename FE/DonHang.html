@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Sách Đơn Hàng</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <h2>Danh Sách Đơn Hàng</h2>
+  <a href="Index.html">⬅ Quay lại</a>
+
+  <table id="orderTable">
+    <thead>
+      <tr>
+        <th>Số ĐH</th>
+        <th>Ngày tạo</th>
+        <th>Giảm giá</th>
+        <th>Tổng tiền</th>
+        <th>Nhân viên phụ trách</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+  fetch("../API/DonHang.php")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#orderTable tbody");
+      data.forEach(dh => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${dh.SoDH}</td>
+            <td>${dh.NgayTao}</td>
+            <td>${dh.GiamGia}</td>
+            <td>${dh.TongTien}</td>
+            <td>${dh.NhanVienPhuTrach ?? "Chưa có"}</td>
+          </tr>`;
+      });
+      tbody.innerHTML += row;
+    })
+    .catch(err => console.error("Lỗi load đơn hàng:", err));
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Sách Nhân Viên</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <h2>Danh Sách Nhân Viên</h2>
+  <a href="Index.html">⬅ Quay lại</a>
+
+  <table id="nvTable">
+    <thead>
+      <tr>
+        <th>Mã NV</th>
+        <th>Tên NV</th>
+        <th>Giới tính</th>
+        <th>Ngày sinh</th>
+        <th>Địa chỉ</th>
+        <th>SĐT</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+  fetch("../API/NhanVien.php")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#nvTable tbody");
+      data.forEach(nv => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${nv.MaNV}</td>
+            <td>${nv.TenNV}</td>
+            <td>${nv.GioiTinh}</td>
+            <td>${nv.NgaySinh}</td>
+            <td>${nv.DiaChi}</td>
+            <td>${nv.SDT}</td>
+          </tr>`;
+      });
+    })
+    .catch(err => console.error(err));
+  </script>
+</body>
+</html>

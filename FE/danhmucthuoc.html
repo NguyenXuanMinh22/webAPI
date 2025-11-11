@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Mục Thuốc</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <h2>Danh Mục Thuốc</h2>
+  <a href="Index.html">⬅ Quay lại</a>
+
+  <table id="dmTable">
+    <thead>
+      <tr>
+        <th>Mã Danh Mục</th>
+        <th>Tên Danh Mục</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+  fetch("../API/DanhMucThuoc.php")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#dmTable tbody");
+      data.forEach(dm => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${dm.MaDM}</td>
+            <td>${dm.TenDM}</td>
+          </tr>`;
+      });
+    })
+    .catch(err => console.error(err));
+  </script>
+</body>
+</html>

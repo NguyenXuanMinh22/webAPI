@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Sách Sản Phẩm</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <h2>Danh Sách Sản Phẩm</h2>
+  <a href="Index.html">⬅ Quay lại</a>
+
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>Mã SP</th>
+        <th>Tên SP</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Danh mục</th>
+        <th>Thương hiệu</th>
+        <th>ĐVT</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+  fetch("../API/SanPham.php")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#productTable tbody");
+      tbody.innerHTML = "";
+      data.forEach(sp => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${sp.MaSP}</td>
+            <td>${sp.TenSP}</td>
+            <td>${sp.Gia}</td>
+            <td>${sp.SoLuongTon}</td>
+            <td>${sp.TenDM || ''}</td>
+            <td>${sp.TenTH || ''}</td>
+            <td>${sp.TenDVT || ''}</td>
+          </tr>`;
+      });
+    })
+    .catch(err => console.error(err));
+  </script>
+</body>
+</html>
