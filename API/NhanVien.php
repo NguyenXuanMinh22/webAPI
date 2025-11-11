@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
 include("db.php");
 
 $method = $_SERVER['REQUEST_METHOD'];
